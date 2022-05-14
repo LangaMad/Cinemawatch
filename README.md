@@ -1,5 +1,1 @@
 # CINEMAWATCH
-# Dauren
-
-# NEw PUSH 
-# 123
