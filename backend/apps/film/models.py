@@ -5,7 +5,7 @@ from django.db import models
 
 class Actor(models.Model):
     name = models.CharField('Имя', max_length=70)
-    age = models.IntegerField('Возраст', max_length=3)
+    age = models.IntegerField('Возраст')
     is_alive = models.BooleanField('Жив', default=True)
     biography = models.TextField('Биография')
     image = models.ImageField('Фото', upload_to='actors_image/' )
@@ -21,7 +21,7 @@ class Actor(models.Model):
 
 class Director(models.Model):
     name = models.CharField('Имя', max_length=70)
-    age = models.IntegerField('Возраст', max_length=3)
+    age = models.IntegerField('Возраст')
     is_alive = models.BooleanField('Жив', default=True)
     biography = models.TextField('Биография')
     image = models.ImageField('Фото', upload_to='director_image/')
@@ -65,7 +65,7 @@ class Film(models.Model):
     actors = models.ManyToManyField(Actor,verbose_name='Актер',related_name='film_actor')
     genres = models.ManyToManyField(Genre,verbose_name='Жанр',related_name='film_genre')
     country = models.CharField("Страна", max_length=60)
-    long_time = models.IntegerField("Длительность", max_length=4)
+    long_time = models.IntegerField("Длительность")
 
 
 
