@@ -68,6 +68,16 @@ class Film(models.Model):
     long_time = models.IntegerField("Длительность")
 
 
+    class Meta:
+        verbose_name = "Фильм"
+        verbose_name_plural = "Фильмы"
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name[:15]
+
+
+
 
 
 

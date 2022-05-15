@@ -33,5 +33,19 @@ class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+@admin.register(Film)
+class FilmAdmin(admin.ModelAdmin):
+    list_display = [
+    'name',
+    'description',
+    'image',
+    'film',
+    'age_control',
+    'rating_critic',
+    'rating_viewer',
+    'relise_date',
+    'country',
+    'long_time',
 
+    ]
 
