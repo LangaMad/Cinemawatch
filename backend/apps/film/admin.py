@@ -46,6 +46,8 @@ class FilmAdmin(admin.ModelAdmin):
     'relise_date',
     'country',
     'long_time',
+    'film_added',
+    'is_coming_soon',
 
     ]
 

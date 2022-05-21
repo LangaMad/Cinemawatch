@@ -66,7 +66,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'backend.apps.film.last_added_films_context.get_films',
+                'backend.apps.film.films_context.get_rated_films',
+                'backend.apps.film.films_context.get_announced_films',
+                'backend.apps.film.films_context.get_last_films',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
