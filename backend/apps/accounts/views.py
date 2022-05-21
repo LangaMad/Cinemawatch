@@ -14,14 +14,15 @@ from django.urls import reverse_lazy
 from .forms import LoginForm,UserRegisterForm
 # Create your views here.
 class LoginView(FormView):
-
+    template_name = 'sign_in.html'
     form_class = LoginForm
 
     def form_valid(self, form):
         data = form.cleaned_data
+        username  = data['username']
         email = data['email']
         password = data['password']
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=username,email=email, password=password)
         if user is not None:
             if user.is_active:
                 login(self.request, user)
@@ -31,8 +32,9 @@ class LoginView(FormView):
         return HttpResponse('Такого юзера не существует')
 
 class UserRegisterView(CreateView):
-
+    template_name = 'sign_up.html'
     form_class = UserRegisterForm
+    success_url = reverse_lazy('index')
 
 
 
