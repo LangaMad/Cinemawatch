@@ -31,14 +31,13 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
 class User(AbstractUser):
-    username = models.CharField("Имя пользователя", max_length=15)
+    username = models.CharField("Имя пользователя", max_length=15,unique=True)
     email = models.EmailField("Email", unique=True)
     avatar = models.ImageField("Фото", upload_to="user_images/", null=True, blank=True)
     experience = models.IntegerField('Опыт', default=0)
     created = models.DateTimeField("Дата создания", auto_now_add=True)
     ranks = models.ManyToManyField(Rank, verbose_name='Ранг', related_name='user_rank')
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+
     objects = UserManager()
 
