@@ -66,12 +66,13 @@ class Film(models.Model):
     genres = models.ManyToManyField(Genre,verbose_name='Жанр',related_name='film_genre')
     country = models.CharField("Страна", max_length=60)
     long_time = models.IntegerField("Длительность")
+    film_added = models.DateField("Фильм добавлен", auto_now_add=True)
 
 
     class Meta:
         verbose_name = "Фильм"
         verbose_name_plural = "Фильмы"
-        ordering = ["name"]
+        ordering = ["-film_added"]
 
     def __str__(self):
         return self.name[:15]
