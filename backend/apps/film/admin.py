@@ -10,6 +10,7 @@ class ActorAdmin(admin.ModelAdmin):
     'birthday',
     'country',
     'is_alive',
+    'short_biography',
     'biography',
     'image',
     ]
@@ -21,6 +22,7 @@ class DirectorAdmin(admin.ModelAdmin):
     'birthday',
     'country',
     'is_alive',
+    'short_biography',
     'biography',
     'image',
     ]

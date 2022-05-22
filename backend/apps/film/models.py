@@ -6,11 +6,11 @@ from django.db import models
 class Actor(models.Model):
     full_name = models.CharField('Имя', max_length=70)
     birthday = models.DateField("День рождения")
-    country = models.CharField("Страна", max_length=60, default='USA')
+    country = models.CharField("Страна", max_length=60)
     is_alive = models.BooleanField('Жив', default=True)
-    short_biography = models.TextField("Короткая биография", default='Timed')
+    short_biography = models.TextField("Короткая биография")
     biography = models.TextField('Биография')
-    career = models.CharField('Карьера', max_length=60, default='Director')
+    career = models.CharField('Карьера', max_length=60)
     image = models.ImageField('Фото', upload_to='actors_image/')
 
     class Meta:
@@ -24,11 +24,11 @@ class Actor(models.Model):
 class Director(models.Model):
     full_name = models.CharField('Имя', max_length=70)
     birthday = models.DateField("День рождения")
-    country = models.CharField("Страна", max_length=60, default='USA')
+    country = models.CharField("Страна", max_length=60)
     is_alive = models.BooleanField('Жив', default=True)
-    short_biography = models.TextField("Короткая биография", default='Timed')
+    short_biography = models.TextField("Короткая биография")
     biography = models.TextField('Биография')
-    career = models.CharField('Карьера', max_length=60, default='Director')
+    career = models.CharField('Карьера', max_length=60)
     image = models.ImageField('Фото', upload_to='directors_image/')
 
     class Meta:
