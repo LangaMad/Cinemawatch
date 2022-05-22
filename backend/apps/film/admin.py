@@ -5,24 +5,25 @@ from .models import *
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
     list_display = [
-    'name',
-    'age',
+    'id',
+    'full_name',
+    'birthday',
+    'country',
     'is_alive',
     'biography',
     'image',
-    'id',
     ]
 @admin.register(Director)
 class DirectorAdmin(admin.ModelAdmin):
     list_display = [
-    'name',
-    'age',
+    'id',
+    'full_name',
+    'birthday',
+    'country',
     'is_alive',
     'biography',
     'image',
-    'id',
     ]
-
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     list_display = [
@@ -41,13 +42,13 @@ class FilmAdmin(admin.ModelAdmin):
     'image',
     'film',
     'age_control',
+    'is_coming_soon',
     'rating_critic',
     'rating_viewer',
     'relise_date',
     'country',
     'long_time',
     'film_added',
-    'is_coming_soon',
 
     ]
 

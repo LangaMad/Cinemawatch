@@ -4,35 +4,38 @@ from django.db import models
 
 
 class Actor(models.Model):
-    name = models.CharField('Имя', max_length=70)
-    age = models.IntegerField('Возраст')
+    full_name = models.CharField('Имя', max_length=70)
+    birthday = models.DateField("День рождения")
+    country = models.CharField("Страна", max_length=60, default='USA')
     is_alive = models.BooleanField('Жив', default=True)
     biography = models.TextField('Биография')
-    image = models.ImageField('Фото', upload_to='actors_image/' )
+    career = models.CharField('Карьера', max_length=60, default='Director')
+    image = models.ImageField('Фото', upload_to='actors_image/')
 
     class Meta:
         verbose_name = "Актер"
         verbose_name_plural = "Актеры"
-        ordering = ["name"]
+        ordering = ["full_name"]
 
     def __str__(self):
-        return self.name
-
+        return self.full_name
 
 class Director(models.Model):
-    name = models.CharField('Имя', max_length=70)
-    age = models.IntegerField('Возраст')
+    full_name = models.CharField('Имя', max_length=70)
+    birthday = models.DateField("День рождения")
+    country = models.CharField("Страна", max_length=60, default='USA')
     is_alive = models.BooleanField('Жив', default=True)
     biography = models.TextField('Биография')
-    image = models.ImageField('Фото', upload_to='director_image/')
+    career = models.CharField('Карьера', max_length=60, default='Director')
+    image = models.ImageField('Фото', upload_to='directors_image/')
 
     class Meta:
         verbose_name = "Режиссер"
         verbose_name_plural = "Режиссеры"
-        ordering = ["name"]
+        ordering = ["full_name"]
 
     def __str__(self):
-        return self.name
+        return self.full_name
 
 
 class Genre(models.Model):
@@ -62,7 +65,7 @@ class Film(models.Model):
     rating_viewer = models.DecimalField('Рейтинг зрителей', max_digits=3, decimal_places=1)
     relise_date = models.CharField("Дата выхода", max_length=50)
     is_coming_soon = models.BooleanField("Это Анонс?", default=True)
-    directors = models.ManyToManyField(Director,verbose_name='Режиссер',related_name='film_director')
+    directors = models.ManyToManyField(Director,verbose_name='Режиссер',related_name='film_director',)
     actors = models.ManyToManyField(Actor,verbose_name='Актер',related_name='film_actor')
     genres = models.ManyToManyField(Genre,verbose_name='Жанр',related_name='film_genre')
     country = models.CharField("Страна", max_length=60)
