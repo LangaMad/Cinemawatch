@@ -1,5 +1,9 @@
 
 from django.shortcuts import render
+from django.views.generic import TemplateView , DetailView
+from .models import Film
+from django.views.generic import TemplateView, DetailView
+from .models import Actor
 from django.views.generic import TemplateView, DetailView, ListView
 from .models import Actor, Director, Film
 from itertools import chain
@@ -7,6 +11,16 @@ from itertools import chain
 
 class IndexPage(TemplateView):
     template_name = "index.html"
+
+
+
+class FilmDetailView(DetailView):
+    model = Film
+    template_name = 'film_single.html'
+    context_object_name = "film"
+
+
+
 
 class CelebrityListView(ListView):
     model = Actor

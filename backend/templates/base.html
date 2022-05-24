@@ -140,7 +140,7 @@
 								<li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
 							</ul>
 						</li>
-						<li><a href="#">Help</a></li>
+
 						{% if not  request.user.is_authenticated %}
 						<li class=""><a href="{% url 'sign_in' %}">LOG In</a></li>
 						<li class=""><a href="{% url 'sign_up' %}">sign up</a></li>

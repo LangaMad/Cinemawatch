@@ -4,6 +4,7 @@ from .views import *
 
 urlpatterns = [
         path('', IndexPage.as_view(), name='index'),
+        path('film/<int:pk>/',FilmDetailView.as_view(), name = 'film_single')
         path('celebrity/detail/<int:pk>/', CelebrityDetailView.as_view(), name='celebrity_detail'),
         path('list/', CelebrityListView.as_view(), name='celebrity_list'),
         path('film/list/', FilmListView.as_view(), name='film_list'),
