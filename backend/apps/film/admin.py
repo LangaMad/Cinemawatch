@@ -47,7 +47,7 @@ class FilmAdmin(admin.ModelAdmin):
     'is_coming_soon',
     'rating_critic',
     'rating_viewer',
-    'relise_date',
+    'date_relise',
     'country',
     'long_time',
     'film_added',

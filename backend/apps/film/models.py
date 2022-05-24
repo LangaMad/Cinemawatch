@@ -65,7 +65,7 @@ class Film(models.Model):
     age_control = models.CharField('Возрастное ограничение', max_length=5, help_text='MPAA система')
     rating_critic = models.DecimalField('Рейтинг критиков', max_digits=3, decimal_places=1)
     rating_viewer = models.DecimalField('Рейтинг зрителей', max_digits=3, decimal_places=1)
-    relise_date = models.CharField("Дата выхода", max_length=50)
+    date_relise = models.DateField("Дата выхода")
     is_coming_soon = models.BooleanField("Это Анонс?", default=True)
     directors = models.ManyToManyField(Director,verbose_name='Режиссер',related_name='film_director',)
     actors = models.ManyToManyField(Actor,verbose_name='Актер',related_name='film_actor')
