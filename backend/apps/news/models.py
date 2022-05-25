@@ -2,24 +2,28 @@ from django.db import models
 
 # Create your models here.
 
+class Trailer(models.Model):
+    title = models.CharField('Заголовок', max_length=60)
+    link = models.URLField('Ссылка', help_text='Принимаются ссылки только с ютуб-хостинга')
+    long_time = models.DecimalField("Длительность", max_digits=3,decimal_places=2)
+    added = models.DateField("Дата добавления", auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Трейлер'
+        verbose_name_plural = 'Трейлеры'
+        ordering = ['-added']
+
+
 class News(models.Model):
-    title = models.CharField('Заголовок', max_length=100)
-    text = models.TextField('Текст')
-    image = models.ImageField('Фото', upload_to='news_image/')
-    created = models.DateTimeField('Дата публикации', auto_now_add=True)
+    title = models.CharField('Заголовок', max_length=60)
+    poster = models.ImageField('Постер')
+    image = models.ImageField('Изображение')
+    text = models.TextField("Текст")
+    created = models.DateTimeField("Дата публикации", auto_now_add=True)
 
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-
-
-
-class Trailer(models.Model):
-    title = models.CharField('Название',max_length=100)
-    link = models.URLField('Сcылка', max_length=200)
-    class Meta:
-        verbose_name = 'Трейлер'
-        verbose_name_plural = 'Трейлеры'
-
+        ordering = ['-created']
 
 

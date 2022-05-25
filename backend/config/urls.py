@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.apps.film.urls')),
     path('accounts/',include('backend.apps.accounts.urls')),
+    path('celebrity/', include('backend.apps.film.urls'))
 ]
 from django.conf import settings
 from django.conf.urls.static import static

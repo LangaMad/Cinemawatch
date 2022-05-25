@@ -1,5 +1,6 @@
-from .models import Film, Actor
-from random import randint
+from .models import Film, Actor, Director
+from random import random
+from itertools import chain
 
 def get_last_films(request):
     last_films = Film.objects.order_by("film_added")
@@ -15,4 +16,9 @@ def get_rated_films(request):
 
 def get_actors(request):
     actors = Actor.objects.all()
-    return {"actors":actors[:5]}
+    directors = Director.objects.all()
+    celebrities = list(sorted(
+        chain(actors, directors),
+        key=lambda x: random(), reverse=True))
+    return {"actors":celebrities[:5]}
+

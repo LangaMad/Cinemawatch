@@ -51,6 +51,14 @@ class FilmAdmin(admin.ModelAdmin):
     'country',
     'long_time',
     'film_added',
-
     ]
 
+# @admin.register(Trailer)
+# class TrailerAdmin(admin.ModelAdmin):
+#     list_display = [
+#         'id',
+#         'title',
+#         'link',
+#         'long_time',
+#         'added',
+#     ]

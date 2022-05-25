@@ -8,6 +8,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = [
     'title',
     'text',
+    'poster',
     'image',
     'created',
 
@@ -18,5 +19,6 @@ class TailerAdmin(admin.ModelAdmin):
     list_display = [
     'title',
     'link',
-
+    'long_time',
+    'added',
     ]

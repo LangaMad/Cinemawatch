@@ -56,7 +56,6 @@ class Genre(models.Model):
 
 
 
-
 class Film(models.Model):
     name = models.CharField('Название', max_length=70)
     description = models.TextField('Описание')
