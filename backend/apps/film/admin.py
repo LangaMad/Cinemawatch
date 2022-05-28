@@ -52,13 +52,8 @@ class FilmAdmin(admin.ModelAdmin):
     'long_time',
     'film_added',
     ]
-
-# @admin.register(Trailer)
-# class TrailerAdmin(admin.ModelAdmin):
-#     list_display = [
-#         'id',
-#         'title',
-#         'link',
-#         'long_time',
-#         'added',
-#     ]
+    filter_horizontal = [
+        'actors',
+        'directors',
+        'genres'
+    ]
