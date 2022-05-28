@@ -1,7 +1,14 @@
 from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
 from .models import *
+from django import forms
 # Register your models here.
 
+class NewsAdminForm(forms.ModelForm):
+    text = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = News
+        fields = '__all__'
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
@@ -13,9 +20,10 @@ class NewsAdmin(admin.ModelAdmin):
     'created',
 
     ]
+    form = NewsAdminForm
 
 @admin.register(Trailer)
-class TailerAdmin(admin.ModelAdmin):
+class TrailerAdmin(admin.ModelAdmin):
     list_display = [
     'title',
     'link',

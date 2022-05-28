@@ -26,4 +26,3 @@ class News(models.Model):
         verbose_name_plural = 'Новости'
         ordering = ['-created']
 
-

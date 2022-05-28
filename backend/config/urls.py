@@ -20,7 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.apps.film.urls')),
     path('accounts/',include('backend.apps.accounts.urls')),
-    path('celebrity/', include('backend.apps.film.urls'))
+    path('news/', include('backend.apps.news.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 from django.conf import settings
 from django.conf.urls.static import static

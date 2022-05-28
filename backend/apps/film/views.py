@@ -1,7 +1,7 @@
 
 from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView, ListView
-from .models import Actor, Director
+from .models import Actor, Director, Film
 from itertools import chain
 # Create your views here.
 
@@ -17,3 +17,9 @@ class CelebrityDetailView(DetailView):
     model = Actor
     template_name = 'celebrity_detail.html'
     context_object_name = "celebrity"
+
+class FilmListView(ListView):
+    model = Film
+    paginate_by = 2
+    template_name = 'film_list.html'
+    context_object_name = "films"
