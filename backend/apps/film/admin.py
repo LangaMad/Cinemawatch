@@ -54,6 +54,7 @@ class FilmAdmin(admin.ModelAdmin):
     'film_added',
     ]
     filter_horizontal = [
-        'celebrities',
+        'actors',
+        'directors',
         'genres'
     ]
