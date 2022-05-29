@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="slider movie-items">
+	<div class="container">
+		<div class="row">
+			<div class="social-link">
+				<p>Отслеживайте нас: </p>
+				<a href="#"><i class="ion-social-facebook"></i></a>
+				<a href="#"><i class="ion-social-twitter"></i></a>
+				<a href="#"><i class="ion-social-googleplus"></i></a>
+				<a href="#"><i class="ion-social-youtube"></i></a>
+			</div>
+	    	<div  class="slick-multiItemSlider">
+				{% for film in last_films %}
+	    		<div class="movie-item">
+	    			<div class="mv-img">
+	    				<a href="#"><img src="{{film.image.url}}" alt="" width="285" height="437"></a>
+	    			</div>
+	    			<div class="title-in">
+	    				<div class="cate">
+
+							{% for genre in film.genres.all %}
+	    					<span class="blue"><a href="#">{{ genre.name }}</a></span>
+							{% endfor %}
+
+	    				</div>
+	    				<h6><a href="#">{{film.name}}</a></h6>
+	    				<p><i class="ion-android-star"></i><span>{{ film.rating_critic }}</span> /10</p>
+	    			</div>
+	    		</div>
+				{% endfor %}
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+</div>
+<div class="movie-items">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="title-hd">
+					<h2>уже в кино</h2>
+					<a href="{% url 'film_list' %}" class="viewall">Все фильмы <i class="ion-ios-arrow-right"></i></a>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links">
+						<li class="active"><a href="#tab1">Популярные</a></li>
+						<li><a href="#tab2">Анонсированные</a></li>
+					</ul>
+				    <div class="tab-content">
+				        <div id="tab1" class="tab active">
+				            <div class="row">
+				            	<div class="slick-multiItem">
+									{% for film in rated_films %}
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ film.image.url }}" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a  href="moviesingle.html"> О фильме <i class="ion-android-arrow-dropright"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ film.name }}</a></h6>
+					            				<p><i class="ion-android-star"></i><span>{{ film.rating_critic }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+									{% endfor %}
+				            	</div>
+				            </div>
+				        </div>
+				        <div id="tab2" class="tab">
+				           <div class="row">
+				            	<div class="slick-multiItem">
+									{% for film in announced_films %}
+				            		<div class="slide-it">
+				            			<div class="movie-item">
+					            			<div class="mv-img">
+					            				<img src="{{ film.image.url }}" alt="" width="185" height="284">
+					            			</div>
+					            			<div class="hvr-inner">
+					            				<a  href="moviesingle.html"> О фильме <i class="ion-android-arrow-dropright"></i> </a>
+					            			</div>
+					            			<div class="title-in">
+					            				<h6><a href="#">{{ film.name }}</a></h6>
+					            				<p><i class="ion-android-star"></i><span>{{ film.rating_critic }}</span> /10</p>
+					            			</div>
+					            		</div>
+				            		</div>
+									{% endfor %}
+				            	</div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+					<div class="ads">
+						<img src="" alt="Здесь могла быть ваша реклама!" width="336" height="296">
+					</div>
+					<div class="celebrities">
+						<h4 class="sb-title">Популярные актёры</h4>
+						{% for celebrity in celebrities %}
+						<div class="celeb-item">
+							<a href="{% url 'celebrity_detail' celebrity.id %}"><img src="{{celebrity.image.url}}" alt="" width="70" height="70"></a>
+							<div class="celeb-author">
+								<h6><a href="{% url 'celebrity_detail' celebrity.id %}">{{celebrity.full_name}}</a></h6>
+								<span>{{celebrity.career}}</span>
+							</div>
+						</div>
+						{% endfor %}
+
+						<a href="{% url 'celebrity_list' %}" class="btn">Все актёры<i class="ion-ios-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="trailers">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-12">
+				<div class="title-hd">
+					<h2>Новые трейлеры</h2>
+					<a href="#" class="viewall"></a>
+				</div>
+				<div class="videos">
+				 	<div class="slider-for-2 video-ft">
+						{% for trailer in trailers %}
+				 		<div>
+					    	<iframe class="item-video" src="#" data-src="{{trailer.link}}"></iframe>
+					    </div>
+						{% endfor %}
+
+					</div>
+					<div class="slider-nav-2 thumb-ft">
+						{% for trailer in trailers %}
+						<div class="item">
+							<div class="trailer-infor">
+	                        	<h4 class="desc">{{trailer.title}}</h4>
+	                        	<p>{{trailer.long_time}}</p>
+	                        </div>
+						</div>
+						{% endfor %}
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+			<div class="latestnew">
+	<div class="container">
+		<div class="row ipad-width">
+			<div class="col-md-8">
+				<div class="ads">
+					<img src="images/uploads/ads2.png" alt="ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!" width="728" height="106">
+				</div>
+				<div class="title-hd">
+					<h2>Последние новости</h2>
+				</div>
+				<div class="tabs">
+					<ul class="tab-links-3">
+					</ul>
+				    <div class="tab-content">
+					{% for news in news_list %}
+				        <div id="tab31" class="tab active">
+				            <div class="row">
+				            	<div class="blog-item-style-1">
+				            		<img src="{{news.poster.url}}" alt="" style="width:170px;height:250px">
+				            		<div class="blog-it-infor">
+				            			<h3><a href="{% url 'news_detail' news.id %}">{{news.title}}</a></h3>
+				            			<span class="time">{{news.created|date:'m/d/Y H:i'}}</span>
+				            			<p>{{news.text|stringformat:".170s"|safe}}...</p>
+				            		</div>
+				            	</div>
+				            </div>
+				        </div>
+				    </div>
+					{% endfor %}
+				</div>
+
+			</div>
+			<div class="col-md-4">
+				<div class="sidebar">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
