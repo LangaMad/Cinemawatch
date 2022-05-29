@@ -1,9 +1,19 @@
 from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
 from .models import *
+from django import forms
 # Register your models here.
 
-@admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+
+
+class CelebrityAdminForm(forms.ModelForm):
+    biography = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Celebrity
+        fields = '__all__'
+
+@admin.register(Celebrity)
+class CelebrityAdmin(admin.ModelAdmin):
     list_display = [
     'id',
     'full_name',
@@ -14,18 +24,9 @@ class ActorAdmin(admin.ModelAdmin):
     'biography',
     'image',
     ]
-@admin.register(Director)
-class DirectorAdmin(admin.ModelAdmin):
-    list_display = [
-    'id',
-    'full_name',
-    'birthday',
-    'country',
-    'is_alive',
-    'short_biography',
-    'biography',
-    'image',
-    ]
+
+    form = CelebrityAdminForm
+
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     list_display = [
@@ -53,7 +54,6 @@ class FilmAdmin(admin.ModelAdmin):
     'film_added',
     ]
     filter_horizontal = [
-        'actors',
-        'directors',
+        'celebrities',
         'genres'
     ]

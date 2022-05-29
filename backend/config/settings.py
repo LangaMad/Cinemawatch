@@ -72,7 +72,7 @@ TEMPLATES = [
                 'backend.apps.film.films_context.get_rated_films',
                 'backend.apps.film.films_context.get_announced_films',
                 'backend.apps.film.films_context.get_last_films',
-                'backend.apps.film.films_context.get_actors',
+                'backend.apps.film.films_context.get_celebrities',
                 'backend.apps.news.news_context.get_trailers',
                 'backend.apps.news.news_context.get_news',
 
