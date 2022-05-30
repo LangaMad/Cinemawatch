@@ -37,6 +37,14 @@ class GenreAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+
+@admin.register(FilmsPhoto)
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = [
+        'film',
+        'photo',
+    ]
+
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     list_display = [

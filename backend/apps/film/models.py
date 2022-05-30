@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-
+from PIL import Image
 
 
 
@@ -67,8 +67,16 @@ class Film(models.Model):
     def __str__(self):
         return self.name[:15]
 
+class FilmsPhoto(models.Model):
+    film= models.ForeignKey(Film, on_delete=models.CASCADE, related_name='photos')
+    photo = models.ImageField(upload_to ='photos/')
 
-
+    def save(self, *args, **kwargs):
+        super(FilmsPhoto, self).save(*args, **kwargs)
+        img = Image.open(self.photo.path)
+        if img.height > 1125 or img.width > 1125:
+            img.thumbnail((1125, 1125))
+        img.save(self.photo.path, quality=70, optimize=True)
 
 
 
