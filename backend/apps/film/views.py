@@ -22,7 +22,9 @@ class FilmDetailView(DetailView):
 
 class CelebrityListView(ListView):
     model = Celebrity
+    paginate_by = 1
     template_name = 'celebrity_list.html'
+    context_object_name = "celebrities"
 
 class CelebrityDetailView(DetailView):
     model = Celebrity
@@ -31,6 +33,6 @@ class CelebrityDetailView(DetailView):
 
 class FilmListView(ListView):
     model = Film
-    paginate_by = 1
+    paginate_by = 2
     template_name = 'film_list.html'
     context_object_name = "films"

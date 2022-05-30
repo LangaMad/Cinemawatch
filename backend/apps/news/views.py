@@ -1,9 +1,15 @@
 from django.shortcuts import render
 from .models import News
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 # Create your views here.
 
 class NewsDetailView(DetailView):
     model = News
     template_name = 'news_detail.html'
     context_object_name = "news"
+
+class NewsListView(ListView):
+    model = News
+    template_name = 'news_list.html'
+    paginate_by = 1
+    context_object_name = "news_list"
