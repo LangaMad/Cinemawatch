@@ -31,7 +31,7 @@ def get_news_detail(request, pk):
             instance.author = request.user
             instance.news = news
             instance.save()
-        return redirect('news_detail', pk = news.id)
+        return redirect('news_detail', pk=news.id)
     else:
         form = NewsCommentForm()
     context = {

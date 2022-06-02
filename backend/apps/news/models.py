@@ -34,8 +34,8 @@ class News(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
-    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='news_comment_author')
+    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='news_comments')
     text = models.CharField('Текст', max_length=1200,)
     created = models.DateTimeField('Дата создания',auto_now_add=True)
     updated = models.DateTimeField('Дата обновления',auto_now=True)
