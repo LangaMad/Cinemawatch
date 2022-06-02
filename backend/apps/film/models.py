@@ -68,7 +68,7 @@ class Film(models.Model):
         return self.name[:15]
 
 class FilmsPhoto(models.Model):
-    film= models.ForeignKey(Film, on_delete=models.CASCADE, related_name='photos')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='photos')
     photo = models.ImageField(upload_to ='photos/')
 
     def save(self, *args, **kwargs):

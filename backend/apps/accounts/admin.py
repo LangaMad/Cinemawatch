@@ -1,3 +1,19 @@
 from django.contrib import admin
-
+from .models import User, Rank
 # Register your models here.
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = [
+        'username',
+        'email',
+        'avatar',
+
+    ]
+
+@admin.register(Rank)
+class RankAdmin(admin.ModelAdmin):
+    list_display = [
+        'name',
+        ]
+
