@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'backend.apps.news',
 
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'django_filters',
+
 
 ]
 
