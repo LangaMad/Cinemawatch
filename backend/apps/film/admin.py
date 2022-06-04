@@ -12,6 +12,12 @@ class CelebrityAdminForm(forms.ModelForm):
         model = Celebrity
         fields = '__all__'
 
+class FilmAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+    class Meta:
+        model = Film
+        fields = '__all__'
+
 @admin.register(Celebrity)
 class CelebrityAdmin(admin.ModelAdmin):
     list_display = [
@@ -66,3 +72,5 @@ class FilmAdmin(admin.ModelAdmin):
         'directors',
         'genres'
     ]
+
+    form = FilmAdminForm

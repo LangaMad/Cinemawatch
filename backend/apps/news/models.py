@@ -6,7 +6,7 @@ from backend.apps.accounts.models import User
 class Trailer(models.Model):
     title = models.CharField('Заголовок', max_length=60)
     link = models.URLField('Ссылка', help_text='Принимаются ссылки только с ютуб-хостинга')
-    long_time = models.DecimalField("Длительность", max_digits=3,decimal_places=2)
+    long_time = models.DecimalField("Длительность", max_digits=3, decimal_places=2)
     added = models.DateField("Дата добавления", auto_now_add=True)
 
     class Meta:
@@ -16,6 +16,7 @@ class Trailer(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class News(models.Model):
     title = models.CharField('Заголовок', max_length=60)
@@ -34,11 +35,11 @@ class News(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='news_comment_author')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='news_comment_author')
     news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='news_comments')
     text = models.CharField('Текст', max_length=1200,)
-    created = models.DateTimeField('Дата создания',auto_now_add=True)
-    updated = models.DateTimeField('Дата обновления',auto_now=True)
+    created = models.DateTimeField('Дата создания', auto_now_add=True)
+    updated = models.DateTimeField('Дата обновления', auto_now=True)
 
     class Meta:
         verbose_name = 'Комментарий'
