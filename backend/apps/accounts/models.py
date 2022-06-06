@@ -9,6 +9,10 @@ class Rank(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Ранг'
+        verbose_name_plural = 'Ранги'
+
 class UserManager(BaseUserManager):
     def create_user(self, email=None, password=None, **extra_fields):
         if not email:

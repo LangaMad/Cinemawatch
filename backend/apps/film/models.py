@@ -78,6 +78,10 @@ class FilmsPhoto(models.Model):
             img.thumbnail((1125, 1125))
         img.save(self.photo.path, quality=70, optimize=True)
 
+    class Meta:
+        verbose_name = 'Кадр с фильма'
+        verbose_name_plural = 'Кадры с фильма'
+
 
 
 class Comment(models.Model):
@@ -86,6 +90,8 @@ class Comment(models.Model):
     text = models.CharField('Текст', max_length=1200,)
     created = models.DateTimeField('Дата создания',auto_now_add=True)
     updated = models.DateTimeField('Дата обновления',auto_now=True)
+
+
 
 
 
