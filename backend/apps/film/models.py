@@ -91,6 +91,40 @@ class Comment(models.Model):
     created = models.DateTimeField('Дата создания',auto_now_add=True)
     updated = models.DateTimeField('Дата обновления',auto_now=True)
 
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ['-created']
+
+        def __str__(self):
+            return str(self.text)[:60]
+
+
+class RatingStar(models.Model):
+    value = models.IntegerField('Значение')
+
+    class Meta:
+        verbose_name = 'Звезда рейтинга'
+        verbose_name_plural = 'Звезды рейтинга'
+        ordering = ['-value']
+
+    def __str__(self):
+            return f"{self.value}"
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
+    stars = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='film_rating')
+    created = models.DateTimeField('Дата создания', auto_now_add=True)
+    updated = models.DateTimeField('Обновлено', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
+        ordering = ['-created']
+
+    def __str__(self):
+        return f'{self.film} - {self.stars}'
 
 
 

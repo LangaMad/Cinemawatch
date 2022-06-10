@@ -1,9 +1,9 @@
-from .forms import FilmCommentForm
+from .forms import FilmCommentForm, RatingForm
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, DetailView, ListView
-from .models import Film, Celebrity, Comment
+from django.views.generic import TemplateView, DetailView, ListView, View
+from .models import Film, Celebrity, Comment, Rating
 from django.views.decorators.csrf import csrf_exempt
-from django.http import Http404
+from django.http import Http404, HttpResponse
 
 # Create your views here.
 
@@ -29,10 +29,18 @@ def get_film_detail(request, pk):
         return redirect('film_single', pk=film.id)
     else:
         form = FilmCommentForm()
+
+    try:
+        user_rating = Rating.objects.get(user=request.user, film=film)
+    except:
+        user_rating = None
+
     context = {
             'film':film,
             'comments':comments,
-            'form':form
+            'user_rating':user_rating,
+            'form':form,
+            'star_form':RatingForm()
         }
     return render(request, 'film_single.html', context)
 
@@ -54,3 +62,17 @@ class FilmListView(ListView):
     paginate_by = 2
     template_name = 'film_list.html'
     context_object_name = "films"
+
+class AddStarRating(View):
+
+    def post(self, request):
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            Rating.objects.update_or_create(
+                user=request.user,
+                film_id=int(request.POST.get('film')),
+                defaults={"stars_id":int(request.POST.get('star'))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)

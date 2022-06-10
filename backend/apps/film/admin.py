@@ -74,3 +74,20 @@ class FilmAdmin(admin.ModelAdmin):
     ]
 
     form = FilmAdminForm
+
+@admin.register(RatingStar)
+class RatingStarAdmin(admin.ModelAdmin):
+    list_display = [
+        'value'
+    ]
+
+
+@admin.register(Rating)
+class RatingStarAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'stars',
+        'film',
+        'created',
+        'updated'
+    ]
