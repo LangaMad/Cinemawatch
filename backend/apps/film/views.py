@@ -133,15 +133,10 @@ class FilmListFilterView(FilterView):
     filterset_class = FilmFilter
     paginate_by = 4
 
-    def get_queryset(self):
-        print(self.kwargs)
-        genre_slug = self.kwargs.get('slug')
-        if genre_slug:
-            films = Film.objects.filter(genre__slug=genre_slug)
-        else:
-            films = Film.objects.all()
-
-        return films
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = FilmFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 
