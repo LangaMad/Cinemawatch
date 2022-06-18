@@ -51,59 +51,47 @@ class UserRegisterForm(UserCreationForm):
     }
 
 
-class UserUpdateForm(forms.ModelForm,PasswordChangeForm):
-    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-                                   )
-    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-                                   )
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-                                    )
+class UserUpdateForm(forms.ModelForm):
 
 
 
-    avatar = forms.FileInput(
-        attrs={'class':'redbtn'})
-    username = forms.TextInput(
+    avatar = forms.ImageField(
         )
+    username = forms.TextInput(
+        attrs={'class':'user'})
 
     class Meta:
         model = User
         fields = [
             'username',
             "avatar",
-            "old_password",
-            'new_password',
-            'new_password2'
 
 
 
         ]
 
-    def __init__(self, *args, temp=65, **kwargs):
-        self.temp = temp
-        return super().__init__(*args, **kwargs)
 
 
 
 
 
 
-#
-# class PasswordChangingForm (PasswordChangeForm):
-#     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-#         )
-#     new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-#         )
-#     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-#         )
-#
-#     class Meta:
-#         model = User
-#         fields = [
-#             "old_password",
-#             'new_password',
-#             'new_password2'
-#         ]
+
+class PasswordChangingForm (PasswordChangeForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
+        )
+    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
+        )
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
+        )
+
+    class Meta:
+        model = User
+        fields = [
+            "old_password",
+            'new_password',
+            'new_password2'
+        ]
 
 
 

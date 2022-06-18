@@ -9,7 +9,8 @@ urlpatterns = [
         path('celebrity/list/', CelebrityListView.as_view(), name='celebrity_list'),
         path('film/list/', FilmListView.as_view(), name='film_list'),
         path("add-rating/", AddStarRating.as_view(), name='add_rating'),
-        path('film/list/', FilmListFilterView.as_view(), name='film_list'),
+        # path('film/filter/list/', FilmListFilterView.as_view(), name='film_filter'),
+        # path('celebrity/filter/list/', FilmListFilterView.as_view(), name='celebrity_filter'),
         path('film_search/',SearchFilmView.as_view(), name='film_search'),
         path('celebrity_search/',SearchCelebrityView.as_view(), name='celebrity_search'),
 ]

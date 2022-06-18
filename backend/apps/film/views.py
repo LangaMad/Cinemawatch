@@ -8,6 +8,7 @@ from django.http import Http404, HttpResponse
 # Create your views here.
 from django.db.models import Q
 from django_filters.views import FilterView
+from .filters import FilmFilter , CelebrityFilter
 
 class IndexPage(TemplateView):
     template_name = "index.html"
@@ -53,17 +54,30 @@ class CelebrityListView(ListView):
     paginate_by = 1
     template_name = 'celebrity_list.html'
     context_object_name = "celebrities"
+    filterset_class = CelebrityFilter
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = CelebrityFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 class CelebrityDetailView(DetailView):
     model = Celebrity
     template_name = 'celebrity_detail.html'
     context_object_name = "celebrity"
 
-class FilmListView(ListView):
+class FilmListView(FilterView):
     model = Film
     paginate_by = 2
     template_name = 'film_list.html'
     context_object_name = "films"
+    filterset_class = FilmFilter
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = FilmFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 class AddStarRating(View):
 
@@ -103,9 +117,9 @@ class SearchFilmView(ListView):
         context['search_query'] = self.request.GET.get('query')
         return context
 
-from .filters import FilmFilter
+
 class SearchCelebrityView(ListView):
-    model = Film
+    model = Celebrity
     template_name = 'celebrity_list.html'
     paginate_by = 10
 
@@ -127,19 +141,28 @@ class SearchCelebrityView(ListView):
         context['search_query'] = self.request.GET.get('query')
         return context
 
-class FilmListFilterView(FilterView):
-    model = Film
-    template_name = 'film_list.html'
-    filterset_class = FilmFilter
-    paginate_by = 4
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = FilmFilter(self.request.GET, queryset=self.get_queryset())
-        return context
-
-
+# class FilmListFilterView(FilterView):
+#     model = Film
+#     template_name = 'film_list.html'
+#     filterset_class = FilmFilter
+#
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['filter'] = FilmFilter(self.request.GET, queryset=self.get_queryset())
+#         return context
 
 
 
+
+# class CelebrityListFilterView(FilterView):
+#     model = Celebrity
+#     template_name = 'celebrity_list.html'
+#     filterset_class = CelebrityFilter
+#     paginate_by = 4
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['filter'] = CelebrityFilter(self.request.GET, queryset=self.get_queryset())
+#         return context
 

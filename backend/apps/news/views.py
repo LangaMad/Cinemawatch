@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView, View
 from django.http import Http404
 from .forms import NewsCommentForm
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 # Create your views here.
 
 class NewsDetailView(DetailView):
@@ -40,3 +41,30 @@ def get_news_detail(request, pk):
             'form':form
         }
     return render(request, 'news_detail.html', context)
+
+
+
+
+
+class SearchNewsView(ListView):
+    model = News
+    template_name = 'news_list.html'
+    paginate_by = 10
+
+
+    def get_queryset(self):
+        search_text = self.request.GET.get('query')
+        if search_text is None:
+            return self.model.objects.all()
+        q = self.model.objects.filter(
+            Q(name__icontains=search_text)
+            |Q(description__icontains = search_text)
+
+        )
+        return q
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = True
+        context['search_query'] = self.request.GET.get('query')
+        return context

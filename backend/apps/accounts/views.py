@@ -8,7 +8,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse,Http404,HttpResponseForbidden
 from .models import User
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
-from .forms import UserUpdateForm
+from .forms import UserUpdateForm,PasswordChangingForm
 
 
 from django.urls import reverse_lazy
@@ -55,7 +55,7 @@ def UserLogout(request):
 
 
 
-class UserUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView,PasswordChangeView):
+class UserUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     form_class = UserUpdateForm
     template_name = 'user_update.html'
     success_url = reverse_lazy('index')
@@ -68,10 +68,16 @@ class UserUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView,PasswordC
         return False
 
 
-# class PasswordsChangeView(PasswordChangeView):
-#     form_class = PasswordChangingForm
-#     template_name = 'user_update.html'
-#     success_url = reverse_lazy('index')
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    template_name = 'user_update.html'
+    success_url = reverse_lazy('index')
+
+
+
+
+class UserProfileFavoriteView(TemplateView):
+    template_name = 'user_profile_favorite.html'
 
 
 
