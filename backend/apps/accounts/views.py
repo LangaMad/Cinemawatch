@@ -5,7 +5,8 @@ from django.views.generic import (
     TemplateView,
     UpdateView)
 from django.contrib.auth import login,authenticate,logout
-from django.http import HttpResponse,Http404,HttpResponseForbidden
+from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.urls import reverse
 from .models import User
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from .forms import UserUpdateForm,PasswordChangingForm
@@ -18,7 +19,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 
 
-
+class ErrorView(TemplateView):
+    template_name = '404_error.html'
 
 from .forms import LoginForm,UserRegisterForm
 # Create your views here.
@@ -37,8 +39,8 @@ class LoginView(FormView):
                 login(self.request, user)
                 return redirect('index')
             else:
-                return HttpResponse('Ваш аккаунт неактивен')
-        return HttpResponse('Такого юзера не существует')
+                return HttpResponse('404_error.html')
+        return HttpResponseRedirect(reverse('error'))
 
 class UserRegisterView(CreateView):
     template_name = 'sign_up.html'
@@ -70,8 +72,10 @@ class UserUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
-    template_name = 'user_update.html'
+    template_name = 'change_password.html'
     success_url = reverse_lazy('index')
+
+
 
 
 

@@ -55,8 +55,8 @@ class UserUpdateForm(forms.ModelForm):
 
 
 
-    avatar = forms.ImageField(
-        )
+    avatar = forms.FileInput(attrs={'class':'redbtn'})
+
     username = forms.TextInput(
         attrs={'class':'user'})
 
@@ -77,13 +77,9 @@ class UserUpdateForm(forms.ModelForm):
 
 
 
-class PasswordChangingForm (PasswordChangeForm):
-    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-        )
-    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-        )
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'col-md-6 form-it', 'type': 'password'})
-        )
+class PasswordChangingForm(PasswordChangeForm):
+
+
 
     class Meta:
         model = User
