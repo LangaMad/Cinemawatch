@@ -9,19 +9,19 @@ from django.contrib.auth.forms import UserCreationForm ,PasswordChangeForm
 class LoginForm(forms.Form):
     username = forms.CharField(
         label="Username",
-        widget=forms.TextInput(attrs={"class":"form-input","placeholder":"Username"})
+        widget=forms.TextInput(attrs={"class":"form-input","placeholder":"Никнейм"})
     )
 
     email = forms.EmailField(
         label="Электронная почта",
-        widget=forms.EmailInput(attrs={"class":"form-input","placeholder":"Email"})
+        widget=forms.EmailInput(attrs={"class":"form-input","placeholder":"Почта"})
     )
     password = forms.CharField(
         label="Пароль",
         widget=forms.PasswordInput(
             attrs={
                 "class":"form-input",
-                "placeholder":"Password"
+                "placeholder":"Пароль"
             }
             )
     )
@@ -32,6 +32,12 @@ class LoginForm(forms.Form):
 class UserRegisterForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-input","placeholder":"Пароль"}))
     password2=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-input","placeholder":"Повторите пароль"}))
+
+    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-input", "placeholder": "Никнейм"})
+    )
+
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-input", "placeholder": "Почта"}))
+
     class Meta:
         model = User
         fields = [
@@ -39,26 +45,13 @@ class UserRegisterForm(UserCreationForm):
             'email',
         ]
 
-    widgets = {
-        "username": forms.TextInput(
-            attrs={
-                "class":"form-input",
-                "placeholder":"Usrname"}
-        ),
-        "email": forms.EmailInput(attrs={"class":"form-input", "placeholder":"Email"}),
 
 
-    }
+
+
 
 
 class UserUpdateForm(forms.ModelForm):
-
-
-
-    avatar = forms.FileInput(attrs={'class':'redbtn'})
-
-    username = forms.TextInput(
-        attrs={'class':'user'})
 
     class Meta:
         model = User
@@ -66,15 +59,7 @@ class UserUpdateForm(forms.ModelForm):
             'username',
             "avatar",
 
-
-
         ]
-
-
-
-
-
-
 
 
 class PasswordChangingForm(PasswordChangeForm):

@@ -13,9 +13,6 @@ from .forms import UserUpdateForm,PasswordChangingForm
 
 
 from django.urls import reverse_lazy
-from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 
 
@@ -39,7 +36,7 @@ class LoginView(FormView):
                 login(self.request, user)
                 return redirect('index')
             else:
-                return HttpResponse('404_error.html')
+                return HttpResponseRedirect(reverse('error'))
         return HttpResponseRedirect(reverse('error'))
 
 class UserRegisterView(CreateView):

@@ -49,7 +49,7 @@ def get_news_detail(request, pk):
 class SearchNewsView(ListView):
     model = News
     template_name = 'news_list.html'
-    paginate_by = 10
+    paginate_by = 1
 
 
     def get_queryset(self):
@@ -58,7 +58,7 @@ class SearchNewsView(ListView):
             return self.model.objects.all()
         q = self.model.objects.filter(
             Q(name__icontains=search_text)
-            |Q(description__icontains = search_text)
+
 
         )
         return q
