@@ -18,10 +18,15 @@ class Trailer(models.Model):
         return self.title
 
 
+class NewsTag(models.Model):
+    name = models.CharField('Название тэга', max_length=20)
+
+
 class News(models.Model):
     title = models.CharField('Заголовок', max_length=60)
     poster = models.ImageField('Постер')
     image = models.ImageField('Изображение')
+    tags = models.ManyToManyField(NewsTag, related_name='tag_news', blank=True)
     text = models.TextField("Текст")
     created = models.DateTimeField("Дата публикации", auto_now_add=True)
 
@@ -48,3 +53,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.text)[:60]
+

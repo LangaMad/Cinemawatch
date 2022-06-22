@@ -5,6 +5,7 @@ from .models import User, Rank
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = [
+        'id',
         'username',
         'email',
         'avatar',
