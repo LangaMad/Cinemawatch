@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from backend.apps.accounts.models import User
 from .models import News, Comment
 from django.views.generic import DetailView, ListView, View
 from django.http import Http404
@@ -31,6 +32,9 @@ def get_news_detail(request, pk):
             instance = form.save(commit=False)
             instance.author = request.user
             instance.news = news
+            user = User.objects.filter(id=request.user.id)
+            value = int(request.user.experience)+1
+            user.update(experience=str(value))
             instance.save()
         return redirect('news_detail', pk=news.id)
     else:
@@ -49,6 +53,7 @@ def get_news_detail(request, pk):
 class SearchNewsView(ListView):
     model = News
     template_name = 'news_list.html'
+    context_object_name = 'news_list'
     paginate_by = 1
 
 
@@ -57,7 +62,7 @@ class SearchNewsView(ListView):
         if search_text is None:
             return self.model.objects.all()
         q = self.model.objects.filter(
-            Q(name__icontains=search_text)
+            Q(title__icontains=search_text)
 
 
         )

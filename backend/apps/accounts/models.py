@@ -6,6 +6,7 @@ from django.contrib.auth.base_user import BaseUserManager
 class Rank(models.Model):
     name = models.CharField('Название', max_length=20)
 
+
     def __str__(self):
         return self.name
 
@@ -43,7 +44,7 @@ class User(AbstractUser):
     avatar = models.ImageField("Фото", upload_to="user_images/", null=True, blank=True)
     experience = models.IntegerField('Опыт', default=0)
     created = models.DateTimeField("Дата создания", auto_now_add=True)
-    ranks = models.ManyToManyField(Rank, verbose_name='Ранг', related_name='user_rank')
+    rank = models.ForeignKey(Rank, verbose_name='Ранг', related_name='user_rank', on_delete=models.CASCADE, null=True)
 
 
     objects = UserManager()

@@ -16,5 +16,5 @@ def get_rated_films(request):
 
 def get_celebrities(request):
     celebrities = sorted(Celebrity.objects.all().order_by("full_name"), key=lambda x: random())
-    return {"celebrities":celebrities[:5]}
+    return {"celebrities_index":celebrities[:5]}
 
