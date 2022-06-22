@@ -30,3 +30,9 @@ class TrailerAdmin(admin.ModelAdmin):
     'long_time',
     'added',
     ]
+
+@admin.register(NewsTag)
+class NewsTagAdmin(admin.ModelAdmin):
+    list_display = [
+    'name',
+    ]
