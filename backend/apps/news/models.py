@@ -21,6 +21,14 @@ class Trailer(models.Model):
 class NewsTag(models.Model):
     name = models.CharField('Название тэга', max_length=20)
 
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 
 class News(models.Model):
     title = models.CharField('Заголовок', max_length=60)
