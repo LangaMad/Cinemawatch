@@ -1,11 +1,12 @@
 from django.db import models
+
+from backend.apps.films.models import Film
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 
 class Rank(models.Model):
     name = models.CharField('Название', max_length=20)
-
 
     def __str__(self):
         return self.name
@@ -45,7 +46,7 @@ class User(AbstractUser):
     experience = models.IntegerField('Опыт', default=0)
     created = models.DateTimeField("Дата создания", auto_now_add=True)
     rank = models.ForeignKey(Rank, verbose_name='Ранг', related_name='user_rank', on_delete=models.CASCADE, null=True)
-
+    favorite_films = models.ManyToManyField(Film,verbose_name='Любимые фильмы', related_name='favorite_film')
 
     objects = UserManager()
 
