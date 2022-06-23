@@ -39,6 +39,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
+from backend.apps.films.models import Film
 
 class User(AbstractUser):
     username = models.CharField("Username", max_length=15,unique=True)
@@ -47,7 +48,7 @@ class User(AbstractUser):
     experience = models.IntegerField('Опыт', default=0)
     created = models.DateTimeField("Дата создания", auto_now_add=True)
     rank = models.ForeignKey(Rank, verbose_name='Ранг', related_name='user_rank', on_delete=models.CASCADE, null=True)
-    favorite_films = models.ManyToManyField('film.Film',verbose_name='Любимые фильмы', related_name='favorite_film')
+    favorite_films = models.ManyToManyField(Film,verbose_name='Любимые фильмы', related_name='favorite_film')
 
     objects = UserManager()
 
