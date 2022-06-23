@@ -1,9 +1,10 @@
 from django.db import models
 
-from backend.apps.films.models import Film
+
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+
 
 class Rank(models.Model):
     name = models.CharField('Название', max_length=20)

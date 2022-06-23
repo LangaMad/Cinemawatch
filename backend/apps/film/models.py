@@ -1,5 +1,5 @@
 from django.db import models
-from backend.apps.accounts.models import User
+
 # Create your models here.
 from PIL import Image
 
@@ -85,7 +85,7 @@ class FilmsPhoto(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='film_comment_author')
+    author = models.ForeignKey('accounts.User',on_delete=models.CASCADE, related_name='film_comment_author')
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='film_comments')
     text = models.CharField('Текст', max_length=1200,)
     created = models.DateTimeField('Дата создания',auto_now_add=True)
@@ -112,7 +112,7 @@ class RatingStar(models.Model):
             return f"{self.value}"
 
 class Rating(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rating')
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name='user_rating')
     stars = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='film_rating')
     created = models.DateTimeField('Дата создания', auto_now_add=True)

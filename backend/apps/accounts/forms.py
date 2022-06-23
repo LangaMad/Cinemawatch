@@ -53,6 +53,8 @@ class UserRegisterForm(UserCreationForm):
 
 class UserUpdateForm(forms.ModelForm):
 
+    avatar = forms.FileInput(attrs={'class':'redbtn'})
+
     class Meta:
         model = User
         fields = [

@@ -9,7 +9,16 @@ from django.http import Http404, HttpResponse
 # Create your views here.
 from django.db.models import Q
 from django_filters.views import FilterView
-from .filters import FilmFilter, CelebrityFilter
+from .filters import FilmFilter , CelebrityFilter
+from django.http import HttpResponse,Http404,HttpResponseRedirect
+from django.urls import reverse
+
+
+def Add_favorite(request,pk):
+    favorite = get_object_or_404(Film, id = request.POST.get('film_id'))
+    favorite.favorite_films.add(request.user)
+    return HttpResponseRedirect(reverse('film_single' , args =[str(pk)]))
+
 
 from django.contrib.auth.decorators import login_required
 
