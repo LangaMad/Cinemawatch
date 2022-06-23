@@ -10,6 +10,7 @@ class UserAdmin(admin.ModelAdmin):
         'email',
         'avatar',
 
+
     ]
 
 @admin.register(Rank)

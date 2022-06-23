@@ -1,5 +1,5 @@
 from .forms import FilmCommentForm, RatingForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import TemplateView, DetailView, ListView, View
 from .models import Film, Celebrity, Comment, Rating
 from backend.apps.accounts.models import User, Rank
@@ -14,9 +14,10 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.urls import reverse
 
 
-def Add_favorite(request,pk):
-    favorite = get_object_or_404(Film, id = request.POST.get('film_id'))
-    favorite.favorite_films.add(request.user)
+def add_favorite(request, pk):
+    user = request.user
+
+    user.favorite_films.add(pk)
     return HttpResponseRedirect(reverse('film_single' , args =[str(pk)]))
 
 
