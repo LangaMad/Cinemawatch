@@ -85,7 +85,7 @@ def get_film_detail(request, pk):
 
 
 
-class CelebrityListView(ListView):
+class CelebrityListView(FilterView):
     model = Celebrity
     paginate_by = 1
     template_name = 'celebrity_list.html'
