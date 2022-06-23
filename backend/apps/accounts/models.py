@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-from backend.apps.films.models import Film
+from backend.apps.film.models import Film
 
 class User(AbstractUser):
     username = models.CharField("Username", max_length=15,unique=True)
