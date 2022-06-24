@@ -14,11 +14,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.urls import reverse
 
 
-def add_favorite(request, pk):
-    user = request.user
 
-    user.favorite_films.add(pk)
-    return HttpResponseRedirect(reverse('film_single' , args =[str(pk)]))
 
 
 from django.contrib.auth.decorators import login_required
@@ -83,11 +79,16 @@ def get_film_detail(request, pk):
         user_rating = Rating.objects.get(user=request.user, film=film)
     except:
         user_rating = None
+    try:
+        user_favourite = User.objects.get(id=request.user.id, favorite_films=film)
+    except:
+        user_favourite = None
 
     context = {
             'film':film,
             'comments':comments,
             'user_rating':user_rating,
+            'user_favourite':user_favourite,
             'form':form,
             'star_form':RatingForm()
         }
@@ -141,6 +142,16 @@ class AddStarRating(View):
         else:
             return HttpResponse(status=400)
 
+def add_favorite(request, pk):
+    user = request.user
+
+    user.favorite_films.add(pk)
+    return HttpResponseRedirect(reverse('film_single', args=[str(pk)]))
+
+def del_favorite(request, pk):
+    user = request.user
+    user.favorite_films.remove(pk)
+    return HttpResponseRedirect(reverse('film_single', args=[str(pk)]))
 
 class SearchFilmView(ListView):
     model = Film

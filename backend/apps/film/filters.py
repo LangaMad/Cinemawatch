@@ -21,18 +21,12 @@ class FilmFilter(django_filters.FilterSet):
 
 
 class CelebrityFilter(django_filters.FilterSet):
-    genres = django_filters.ModelChoiceFilter(
-        field_name="career",
-        queryset=Celebrity.objects.all(),
-        widget=forms.Select()
-    )
-    date_relise = django_filters.NumberFilter(
+    birthday = django_filters.NumberFilter(
         field_name='birthday', lookup_expr='year'
     )
 
     class Meta:
         model = Celebrity
         fields = [
-            'career',
             'birthday',
             ]

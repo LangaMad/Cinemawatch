@@ -13,5 +13,6 @@ urlpatterns = [
         # path('celebrity/filter/list/', FilmListFilterView.as_view(), name='celebrity_filter'),
         path('film_search/',SearchFilmView.as_view(), name='film_search'),
         path('celebrity_search/',SearchCelebrityView.as_view(), name='celebrity_search'),
-        path('add_favorite/<int:pk>/', add_favorite, name = 'add_favorite' ),
+        path('add_favorite/<int:pk>/', add_favorite, name='add_favorite' ),
+        path('del_favorite/<int:pk>/', del_favorite, name='del_favorite' ),
 ]
