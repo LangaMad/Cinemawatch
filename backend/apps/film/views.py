@@ -13,11 +13,16 @@ from .filters import FilmFilter , CelebrityFilter
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.urls import reverse
 
-
-
-
-
 from django.contrib.auth.decorators import login_required
+
+
+
+
+
+
+
+
+
 
 
 @login_required

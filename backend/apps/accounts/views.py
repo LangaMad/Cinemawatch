@@ -11,7 +11,7 @@ from .models import User
 from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from .forms import UserUpdateForm,PasswordChangingForm
 
-
+from backend.apps.film.models import Film
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 
@@ -79,6 +79,10 @@ class PasswordsChangeView(PasswordChangeView):
 
 class UserProfileFavoriteView(TemplateView):
     template_name = 'user_profile_favorite.html'
+    paginate_by=1
+
+
+
 
 
 
